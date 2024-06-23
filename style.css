@@ -10,7 +10,8 @@
     border-radius: min(4vw,4vh);
     outline-width: min(1vw,1vh);
     outline-style: solid;
-    transition: top 500ms ease-in-out,left 500ms ease-in-out;
+    opacity: 1;
+    transition: top 500ms ease-in-out,left 500ms ease-in-out,opacity 500ms linear;
 }
 
 .white {
@@ -26,4 +27,5 @@
 .bar {
     background-color: grey;
     border-radius: min(1vw,1vh);
+    pointer-events: none;
 }

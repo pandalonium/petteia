@@ -39,9 +39,9 @@ function Game() {
             if (this.whites[i].captured) {
                 document.getElementById(`white${i}`).style.opacity = "0";
                 setTimeout(() => {
-                    document.getElementById(`white${i}`).display = "none";
+                    document.getElementById(`white${i}`).style.display = "none";
                     this.whites[i] = null;
-                },500);
+                },"500");
                 this.grid[this.whites[i].y][this.whites[i].x] = null;
                 continue;
             } else {
@@ -60,6 +60,10 @@ function Game() {
             if (this.blacks[i].captured) {
                 document.getElementById(`black${i}`).style.opacity = "0";
                 
+                setTimeout(() => {
+                    document.getElementById(`black${i}`).style.display = "none";
+                    this.blacks[i] = null;
+                },"500");
                 this.grid[this.blacks[i].y][this.blacks[i].x] = null;
                 continue;
             } else {

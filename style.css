@@ -5,23 +5,24 @@
 }
 
 .pawn {
+    
     height: min(6vw,6vh);
     width: min(6vw,6vh);
     border-radius: min(4vw,4vh);
-    outline-width: min(1vw,1vh);
-    outline-style: solid;
+    border-width: min(1vw,1vh);
+    border-style: solid;
     opacity: 1;
     transition: top 500ms ease-in-out,left 500ms ease-in-out,opacity 500ms linear;
 }
 
 .white {
     background-color: white;
-    outline-color:grey;
+    border-color:grey;
 }
 
 .black {
     background-color: black;
-    outline-color:rgb(50,50,50);
+    border-color:rgb(50,50,50);
 }
 
 .bar {

@@ -48,8 +48,8 @@ function Game() {
                 document.getElementById(`white${i}`).style.opacity = "1";
 
             }
-            var top = 2+10*this.whites[i].y;
-            var left = 2+10*this.whites[i].x;
+            var top = 1+10*this.whites[i].y;
+            var left = 1+10*this.whites[i].x;
             document.getElementById(`white${i}`).style.top = `min(${top}vh,${top}vw)`;
             document.getElementById(`white${i}`).style.left = `min(${left}vh,${left}vw)`;
         }
@@ -69,8 +69,8 @@ function Game() {
             } else {
                 document.getElementById(`black${i}`).style.opacity = "1";
             }
-            var top = 2+10*this.blacks[i].y;
-            var left = 2+10*this.blacks[i].x;
+            var top = 1+10*this.blacks[i].y;
+            var left = 1+10*this.blacks[i].x;
             document.getElementById(`black${i}`).style.top = `min(${top}vh,${top}vw)`;
             document.getElementById(`black${i}`).style.left = `min(${left}vh,${left}vw)`;
         }

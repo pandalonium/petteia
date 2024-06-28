@@ -1,8 +1,118 @@
+* {
+    
+    font-family:'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+}
+
 #board {
     position:fixed;
     left:calc(50vw - min(40vh,40vw));
     top:calc(50vh - min(40vh,40vw));
 }
+
+#whiteTab {
+    background-color: white;
+    border-top:min(1vh,1vw) solid grey;
+    border-left:min(1vh,1vw) solid grey;
+    
+    bottom:0;
+    right:0;
+}
+
+#blackTab {
+    top:0;
+    left:0;
+    
+    background-color: black;
+    border-top:min(1vh,1vw) solid grey;
+    border-left:min(1vh,1vw) solid grey;
+    color:white;
+    transform: rotate(180deg);
+}
+
+#howTo {
+    width:min(80vh,80vw);
+    height:min(80vh,80vw);
+    background-color: blanchedalmond;
+    border-radius: min(5vh,5vw);
+    border:min(1vw,1vh) solid darkgrey;
+    outline:none;
+    opacity:0;
+    transform:translate(0,min(10vh,10vw));
+    font-size: min(3vh,3vw);
+    padding-top:0;
+    transition:opacity 250ms linear,transform 250ms linear;
+    overflow: hidden;
+}
+
+#howTo > * {
+    margin-top:min(2vw,2vh);
+    margin-bottom:min(2vw,2vh);
+}
+
+#howTo::backdrop {
+    background-color:black;
+    opacity:0.5;
+}
+
+#closeHowTo {
+    margin-top:0;
+    height:min(5vw,5vh);
+    width:calc(100% - min(35vw,35vh));
+    background-color:burlywood;
+    border:min(0.5vw,0.5vh) solid chocolate;
+    outline:none;
+    border-radius:min(5vw,5vh);
+    font-size:min(3vw,3vh);
+}
+
+#dontShowSpan {
+    display:inline;
+    
+}
+
+#dontShow {
+    width:min(2.5vw,2.5vh);
+    height:min(2.5vw,2.5vh);
+    vertical-align: baseline;
+    margin:min(1vw,1vh);
+    accent-color: burlywood;
+}
+
+
+
+#acts {
+    position:fixed;
+    top:0;
+    left:0;
+    width:100vw;
+    height:100vh;
+    margin:0;
+    overflow:hidden;
+    pointer-events: none;
+    transition:transform 500ms ease-in-out;
+}
+
+
+.turn {
+    position:absolute;
+    font-size: min(7vw,7vh);
+    right:min(5vw,5vh);
+    bottom:min(0.5vh,0.5vw);
+    text-wrap: nowrap;
+    margin:0;
+}
+
+.tab {
+    
+    width:0;
+    height:min(9vw,9vh);
+    position:fixed;
+    border-top-left-radius: min(5vw,5vh);
+    overflow: hidden;
+    transition: width 250ms ease-in-out;
+}
+
+
 
 .pawn {
     
@@ -29,4 +139,18 @@
     background-color: grey;
     border-radius: min(1vw,1vh);
     pointer-events: none;
+}
+
+.box {
+    position:absolute;
+    width:min(10vh,10vw);
+    height:min(10vw,10vh);
+}
+
+.even {
+    background-color: bisque;
+}
+
+.odd {
+    background-color: burlywood;
 }

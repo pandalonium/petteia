@@ -29,6 +29,7 @@ function Game() {
         [null, null, null, null, null, null, null, null],
         [this.whites[0], this.whites[1], this.whites[2], this.whites[3], this.whites[4], this.whites[5], this.whites[6], this.whites[7]]
     ];
+    this.lastMove = null;
     this.turn = true;
     this.selected = null;
     this.Draw = () => {
@@ -74,6 +75,9 @@ function Game() {
             document.getElementById(`black${i}`).style.top = `min(${top}vh,${top}vw)`;
             document.getElementById(`black${i}`).style.left = `min(${left}vh,${left}vw)`;
         }
+        document.getElementById(`${(!this.turn) ? "white" : "black"}Tab`).style.width = "0";
+
+        document.getElementById(`${(this.turn) ? "white" : "black"}Tab`).style.width = "min(45vw,45vh)";
     }
     this.SelectPebble = (index,colour) => {
         var selected = ((colour) ? this.whites : this.blacks)[index];
@@ -270,6 +274,31 @@ function Pebble(x,y,colour,game,index) {
     
 }
 
+function ShowHowTo() {
+    document.getElementById("howTo").showModal();
+    document.getElementById("howTo").style.opacity="1";
+    document.getElementById("howTo").style.transform="none";
+}
+
+function HideHowTo() {
+    
+    document.getElementById("howTo").style.opacity="0";
+    document.getElementById("howTo").style.transform="translate(0,min(10vh,10vw))";
+    setTimeout(() => {document.getElementById("howTo").close();},"250");
+}
+
 window.onload = (e) => {
     g = new Game();
+    if (!document.cookie.includes("no")) {
+        document.getElementById("howTo").showModal();
+        document.getElementById("howTo").style.opacity="1";
+        document.getElementById("howTo").style.transform="none";
+    }
+    document.getElementById("closeHowTo").addEventListener("click",() => {
+        if (document.getElementById("dontShow").checked) {
+            document.cookie = "tutorial=no;";
+        }
+        HideHowTo();
+    })
+    
 }

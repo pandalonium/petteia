@@ -144,22 +144,22 @@ function Game() {
                 if (this.selected.CanMoveTo(x,y)) {
                     this.selected.MoveTo(x,y);
                     if (x > 0 && this.grid[y][x-1] != null && this.grid[y][x-1].colour == !this.selected.colour
-                        && this.grid[y][x-1].CheckForCaptures()
+                        && this.grid[y][x-1].HorizontalCaptures()
                     ) {
 
                     }
                     if (x < 7 && this.grid[y][x+1] != null && this.grid[y][x+1].colour == !this.selected.colour
-                        && this.grid[y][x+1].CheckForCaptures()
+                        && this.grid[y][x+1].HorizontalCaptures()
                     ) {
 
                     }
                     if (y > 0 && this.grid[y-1][x] != null && this.grid[y-1][x].colour == !this.selected.colour
-                        && this.grid[y-1][x].CheckForCaptures()
+                        && this.grid[y-1][x].VerticalCaptures()
                     ) {
                         
                     }
                     if (y < 7 && this.grid[y+1][x] != null && this.grid[y+1][x].colour == !this.selected.colour
-                        && this.grid[y+1][x].CheckForCaptures()
+                        && this.grid[y+1][x].VerticalCaptures()
                     ) {
                         
                     }
@@ -184,6 +184,60 @@ function Pebble(x,y,colour,game,index) {
     this.captured = false;
     this.selected = false;
     this.index = index;
+    this.HorizontalCaptures = () => {
+        var left = false;
+        var right = false;
+        let x = this.x;
+        let y = this.y;
+        if (this.x > 0) {
+            if (this.game.grid[y][x-1] != null) {
+                if (this.game.grid[y][x-1].colour == !(this.colour)) {
+                    left = true;
+
+                }
+            }
+        }
+        if (this.x < 7) {
+            if (this.game.grid[y][x+1] != null) {
+                if (this.game.grid[y][x+1].colour == !(this.colour)) {
+                    right = true;
+
+                }
+            }
+        }
+        if (left && right) {
+            this.captured = true;
+            return true;
+        }
+        return false;
+    }
+    this.VerticalCaptures = () => {
+        
+        var top = false;
+        var bottom = false;
+        let x = this.x;
+        let y = this.y;
+        if (this.y > 0) {
+            if (this.game.grid[y-1][x] != null) {
+                if (this.game.grid[y-1][x].colour == !(this.colour)) {
+                    top = true;
+                }
+            }
+        }
+        if (this.y < 7) {
+            if (this.game.grid[y+1][x] != null) {
+                
+                if (this.game.grid[y+1][x].colour == !(this.colour)) {
+                    bottom = true;
+                }
+            }
+        }
+        if (top && bottom) {
+            this.captured = true;
+            return true;
+        }
+        return false;
+    }
     this.CheckForCaptures = () => { 
         // Check vertical
         var top = false;

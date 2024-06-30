@@ -51,8 +51,8 @@ function Game() {
             }
             var top = 1+10*this.whites[i].y;
             var left = 1+10*this.whites[i].x;
-            document.getElementById(`white${i}`).style.top = `min(${top}vh,${top}vw)`;
-            document.getElementById(`white${i}`).style.left = `min(${left}vh,${left}vw)`;
+            document.getElementById(`white${i}`).style.top = `${top}vmin`;
+            document.getElementById(`white${i}`).style.left = `${left}vmin`;
         }
         for (let i=0;i<this.blacks.length;i++) {
             if (this.blacks[i] == null) {
@@ -72,12 +72,12 @@ function Game() {
             }
             var top = 1+10*this.blacks[i].y;
             var left = 1+10*this.blacks[i].x;
-            document.getElementById(`black${i}`).style.top = `min(${top}vh,${top}vw)`;
-            document.getElementById(`black${i}`).style.left = `min(${left}vh,${left}vw)`;
+            document.getElementById(`black${i}`).style.top = `${top}vmin`;
+            document.getElementById(`black${i}`).style.left = `${left}vmin`;
         }
         document.getElementById(`${(!this.turn) ? "white" : "black"}Tab`).style.width = "0";
 
-        document.getElementById(`${(this.turn) ? "white" : "black"}Tab`).style.width = "min(45vw,45vh)";
+        document.getElementById(`${(this.turn) ? "white" : "black"}Tab`).style.width = "45vmin";
     }
     this.SelectPebble = (index,colour) => {
         var selected = ((colour) ? this.whites : this.blacks)[index];
@@ -90,9 +90,9 @@ function Game() {
         var selectLeft = 4+10*selected.x;
         var vertical = document.getElementById("verticalBar")
 
-        vertical.style.top = `min(${top}vh,${top}vw)`;
-        vertical.style.left = `min(${selectLeft}vh,${selectLeft}vw)`;
-        vertical.style.height = `min(${bottom-top}vh,${bottom-top}vw)`;
+        vertical.style.top = `${top}vmin`;
+        vertical.style.left = `${selectLeft}vmin`;
+        vertical.style.height = `${bottom-top}vmin`;
         vertical.style.display = "block";
 
         var left = 4+10*moves.left;
@@ -100,9 +100,9 @@ function Game() {
         var selectTop = 4+10*selected.y;
         var horizontal = document.getElementById("horizontalBar")
 
-        horizontal.style.left = `min(${left}vh,${left}vw)`;
-        horizontal.style.top = `min(${selectTop}vh,${selectTop}vw)`;
-        horizontal.style.width = `min(${right-left}vh,${right-left}vw)`;
+        horizontal.style.left = `${left}vmin`;
+        horizontal.style.top = `${selectTop}vmin`;
+        horizontal.style.width = `${right-left}vmin`;
         horizontal.style.display = "block";
     }
     this.Unselect = () => {
@@ -332,6 +332,7 @@ function ShowHowTo() {
     document.getElementById("howTo").showModal();
     document.getElementById("howTo").style.opacity="1";
     document.getElementById("howTo").style.transform="none";
+    document.getElementById("dontShow").checked = document.cookie.includes("no");
 }
 
 function HideHowTo() {
@@ -339,6 +340,11 @@ function HideHowTo() {
     document.getElementById("howTo").style.opacity="0";
     document.getElementById("howTo").style.transform="translate(0,min(10vh,10vw))";
     setTimeout(() => {document.getElementById("howTo").close();},"250");
+}
+
+function ActivateMenuHover() {
+    document.getElementById("acts").classList.add("canCloseHover");
+    document.getElementById("menuBtn").removeEventListener("mouseleave",ActivateMenuHover);
 }
 
 window.onload = (e) => {
@@ -349,10 +355,24 @@ window.onload = (e) => {
         document.getElementById("howTo").style.transform="none";
     }
     document.getElementById("closeHowTo").addEventListener("click",() => {
-        if (document.getElementById("dontShow").checked) {
-            document.cookie = "tutorial=no;";
-        }
+        document.cookie = `tutorial=${(document.getElementById("dontShow").checked) ? "no" : "yes"};`;
+        
         HideHowTo();
+    })
+    document.getElementById("helpBtn").addEventListener("click",() => {
+        ShowHowTo();
+    });
+    document.getElementById("menuBtn").addEventListener("click",() => {
+        var menu = document.getElementById("acts");
+        if (menu.style.height == "30vmin") {
+            menu.style.height = "0";
+            menu.classList.remove("canCloseHover");
+        } else {
+            menu.style.height = "30vmin";
+            
+        document.getElementById("menuBtn").addEventListener("mouseleave", ActivateMenuHover);
+        }
     })
     
 }
+

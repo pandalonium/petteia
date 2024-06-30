@@ -5,14 +5,14 @@
 
 #board {
     position:fixed;
-    left:calc(50vw - min(40vh,40vw));
-    top:calc(50vh - min(40vh,40vw));
+    left:calc(50vw - 40vmin);
+    top:calc(50vh - 40vmin);
 }
 
 #whiteTab {
     background-color: white;
-    border-top:min(1vh,1vw) solid grey;
-    border-left:min(1vh,1vw) solid grey;
+    border-top:1vmin solid grey;
+    border-left:1vmin solid grey;
     
     bottom:0;
     right:0;
@@ -23,30 +23,30 @@
     left:0;
     
     background-color: black;
-    border-top:min(1vh,1vw) solid grey;
-    border-left:min(1vh,1vw) solid grey;
+    border-top:1vmin solid grey;
+    border-left:1vmin solid grey;
     color:white;
     transform: rotate(180deg);
 }
 
 #howTo {
-    width:min(80vh,80vw);
-    height:min(80vh,80vw);
+    width:80vmin;
+    height:80vmin;
     background-color: blanchedalmond;
-    border-radius: min(5vh,5vw);
-    border:min(1vw,1vh) solid darkgrey;
+    border-radius: 5vmin;
+    border:1vmin solid darkgrey;
     outline:none;
     opacity:0;
-    transform:translate(0,min(10vh,10vw));
-    font-size: min(3vh,3vw);
+    transform:translate(0,10vmin);
+    font-size: 3vmin;
     padding-top:0;
     transition:opacity 250ms linear,transform 250ms linear;
     overflow: hidden;
 }
 
 #howTo > * {
-    margin-top:min(2vw,2vh);
-    margin-bottom:min(2vw,2vh);
+    margin-top:2vmin;
+    margin-bottom:2vmin;
 }
 
 #howTo::backdrop {
@@ -56,13 +56,13 @@
 
 #closeHowTo {
     margin-top:0;
-    height:min(5vw,5vh);
-    width:calc(100% - min(35vw,35vh));
+    height:5vmin;
+    width:calc(100% - 35vmin);
     background-color:burlywood;
-    border:min(0.5vw,0.5vh) solid chocolate;
+    border:0.5vmin solid chocolate;
     outline:none;
-    border-radius:min(5vw,5vh);
-    font-size:min(3vw,3vh);
+    border-radius:5vmin;
+    font-size:3vmin;
 }
 
 #dontShowSpan {
@@ -71,33 +71,98 @@
 }
 
 #dontShow {
-    width:min(2.5vw,2.5vh);
-    height:min(2.5vw,2.5vh);
+    width:2.5vmin;
+    height:2.5vmin;
     vertical-align: baseline;
-    margin:min(1vw,1vh);
+    margin:1vmin;
     accent-color: burlywood;
 }
-
 
 
 #acts {
     position:fixed;
     top:0;
-    left:0;
-    width:100vw;
-    height:100vh;
-    margin:0;
+    right:0;
+    height:0;
+    width:100%;
     overflow:hidden;
     pointer-events: none;
-    transition:transform 500ms ease-in-out;
+    transition:height 500ms ease;
+}
+
+
+
+
+#helpOpt {
+    top:10vmin;
+    background-color: burlywood;
+}
+
+#aboutOpt {
+    top:20vmin;
+    background-color: #7b3f00ff;
+}
+#closeOpt {
+    top:0;
+    background-color: bisque;
+}
+
+body:has(#acts.canCloseHover):has(#menuBtn:hover) #closeOpt {
+    width:40vmin;
+}
+
+#menuBtn {
+    
+    width:10vmin;
+    height:10vmin;
+    position:fixed;
+    top:0;
+    right:0;
+    pointer-events: all;
+}
+
+
+
+.option {
+    width:10vmin;
+    height:10vmin;
+    position:absolute;
+    pointer-events: all;
+    right:0;
+    display:inline-block;
+    overflow:hidden;
+    transition:width 250ms ease;
+}
+.option:hover {
+    width:40vmin;
+}
+
+.optBtn {
+    width:10vmin;
+    height:10vmin;
+    position:absolute;
+    top:0;
+    right:0;
+    pointer-events: all;
+}
+
+.optLabel {
+    position:absolute;
+    top:0;
+    width:auto;
+    text-wrap: nowrap;
+    right:10vmin;
+    font-size: 4vmin;
+    margin:3vmin;
+    display:inline-block;
 }
 
 
 .turn {
     position:absolute;
-    font-size: min(7vw,7vh);
-    right:min(5vw,5vh);
-    bottom:min(0.5vh,0.5vw);
+    font-size: 7vmin;
+    right:5vmin;
+    bottom:0.5vmin;
     text-wrap: nowrap;
     margin:0;
 }
@@ -105,9 +170,9 @@
 .tab {
     
     width:0;
-    height:min(9vw,9vh);
+    height:9vmin;
     position:fixed;
-    border-top-left-radius: min(5vw,5vh);
+    border-top-left-radius: 5vmin;
     overflow: hidden;
     transition: width 250ms ease-in-out;
 }
@@ -116,10 +181,10 @@
 
 .pawn {
     
-    height: min(6vw,6vh);
-    width: min(6vw,6vh);
-    border-radius: min(4vw,4vh);
-    border-width: min(1vw,1vh);
+    height: 6vmin;
+    width: 6vmin;
+    border-radius: 4vmin;
+    border-width: 1vmin;
     border-style: solid;
     opacity: 1;
     transition: top 500ms ease-in-out,left 500ms ease-in-out,opacity 500ms linear;
@@ -137,14 +202,14 @@
 
 .bar {
     background-color: grey;
-    border-radius: min(1vw,1vh);
+    border-radius: 1vmin;
     pointer-events: none;
 }
 
 .box {
     position:absolute;
-    width:min(10vh,10vw);
-    height:min(10vw,10vh);
+    width:10vmin;
+    height:10vmin;
 }
 
 .even {
@@ -153,4 +218,10 @@
 
 .odd {
     background-color: burlywood;
+}
+
+@media (hover: none) {
+    .option {
+        width:40vmin;
+    }
 }

@@ -106,15 +106,21 @@
             <li>In each player's turn, they can move one piece in any distance horizontally or vertically as long as they are not obstructed by another peice.</li>
             <li>To move a piece, click on it to select it then click on a square to move it to that square.</li>
             <li>Pieces can be captured if two of the opponent's pieces sandwich the piece horizontally or vertically.</li>
-            <li>You can, however, move your piece into a sandwiched square without it getting captured. It is only if your opponent moves the piece into a position to capture yours that your piece gets captured.</li>
-            <li>If your opponent is reduced to a ingle piece, then you win and the game ends.</li>
+            <li>You can, however, move your piece into an already-sandwiched square without it getting captured.</li>
+            <li>If your opponent is reduced to a single piece, then you win and the game ends.</li>
             <li>If your opponent has more than one piece but cannot move any piece then you also win.</li>
+            <li>You may also agree a draw if the game is looping endlessly.</li>
         </ul>
         <button id="closeHowTo">Close</button>
         <span id="dontShowSpan" title="This uses cookies."><input type="checkbox" name="dontShow" id="dontShow"><label for="dontShow">Don't show this again</label></span>
     
     </dialog>
+    
     <nav id="acts">
+        <div id="closeOpt" class="option"><div class="optLabel">Close</div></div>
+        <div id="helpOpt" class="option"><div class="optLabel">How To Play</div><img src="./media/help.svg" id="helpBtn" class="optBtn"></div>
+        <div id="aboutOpt" class="option"><div class="optLabel">About Petteia</div><img src="./media/book.svg" id="aboutBtn" class="optBtn"></div>
     </nav>
+    <img src="./media/hamburger.svg" id="menuBtn" title="Menu">
     </body>
 </html>

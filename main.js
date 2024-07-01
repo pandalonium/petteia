@@ -1,3 +1,5 @@
+var g;
+
 function Game() {
     this.whites = [
         new Pebble(0,7,true,this,0),
@@ -347,6 +349,8 @@ function ActivateMenuHover() {
     document.getElementById("menuBtn").removeEventListener("mouseleave",ActivateMenuHover);
 }
 
+function NewGame() { g = new Game(); }
+
 window.onload = (e) => {
     g = new Game();
     if (!document.cookie.includes("no")) {
@@ -364,15 +368,16 @@ window.onload = (e) => {
     });
     document.getElementById("menuBtn").addEventListener("click",() => {
         var menu = document.getElementById("acts");
-        if (menu.style.height == "30vmin") {
+        if (menu.style.height == "40vmin") {
             menu.style.height = "0";
             menu.classList.remove("canCloseHover");
         } else {
-            menu.style.height = "30vmin";
+            menu.style.height = "40vmin";
             
         document.getElementById("menuBtn").addEventListener("mouseleave", ActivateMenuHover);
         }
     })
+    document.getElementById("restartBtn").addEventListener("click",NewGame);
     
 }
 

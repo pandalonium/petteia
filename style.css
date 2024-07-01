@@ -92,20 +92,26 @@
 
 
 
+#closeOpt {
+    top:0;
+    background-color: antiquewhite;
+}
+
+#restartOpt {
+    top:10vmin;
+    background-color: bisque;
+}
 
 #helpOpt {
-    top:10vmin;
+    top:20vmin;
     background-color: burlywood;
 }
 
 #aboutOpt {
-    top:20vmin;
+    top:30vmin;
     background-color: #7b3f00ff;
 }
-#closeOpt {
-    top:0;
-    background-color: bisque;
-}
+
 
 body:has(#acts.canCloseHover):has(#menuBtn:hover) #closeOpt {
     width:40vmin;

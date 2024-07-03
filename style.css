@@ -3,6 +3,19 @@
     font-family:'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
 }
 
+dialog {
+    
+    background-color: blanchedalmond;
+    border-radius: 5vmin;
+    border:1vmin solid darkgrey;
+    outline:none;
+}
+
+dialog::backdrop {
+    background-color:black;
+    opacity:0.5;
+}
+
 #board {
     position:fixed;
     left:calc(50vw - 40vmin);
@@ -32,10 +45,6 @@
 #howTo {
     width:80vmin;
     height:80vmin;
-    background-color: blanchedalmond;
-    border-radius: 5vmin;
-    border:1vmin solid darkgrey;
-    outline:none;
     opacity:0;
     transform:translate(0,10vmin);
     font-size: 3vmin;
@@ -49,21 +58,27 @@
     margin-bottom:2vmin;
 }
 
-#howTo::backdrop {
-    background-color:black;
-    opacity:0.5;
-}
 
-#closeHowTo {
-    margin-top:0;
+
+.closeBtn {
     height:5vmin;
-    width:calc(100% - 35vmin);
     background-color:burlywood;
     border:0.5vmin solid chocolate;
     outline:none;
     border-radius:5vmin;
     font-size:3vmin;
 }
+
+#closeHowTo {
+    
+    margin-top:0;
+    width:calc(100% - 35vmin);
+}
+
+#playAgain {
+    margin:4vmin;
+}
+
 
 #dontShowSpan {
     display:inline;
@@ -112,6 +127,10 @@
     background-color: #7b3f00ff;
 }
 
+#aboutOpt .optLabel {
+    color:white;
+}
+
 
 body:has(#acts.canCloseHover):has(#menuBtn:hover) #closeOpt {
     width:40vmin;
@@ -127,7 +146,9 @@ body:has(#acts.canCloseHover):has(#menuBtn:hover) #closeOpt {
     pointer-events: all;
 }
 
-
+body.stop-transition * {
+    transition:none !important;
+}
 
 .option {
     width:10vmin;

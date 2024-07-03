@@ -47,10 +47,11 @@ function Game() {
                 },"500");
                 this.grid[this.whites[i].y][this.whites[i].x] = null;
                 continue;
-            } else {
-                document.getElementById(`white${i}`).style.opacity = "1";
+            } 
+            // else {
+            //     document.getElementById(`white${i}`).style.opacity = "1";
 
-            }
+            // }
             var top = 1+10*this.whites[i].y;
             var left = 1+10*this.whites[i].x;
             document.getElementById(`white${i}`).style.top = `${top}vmin`;
@@ -69,9 +70,10 @@ function Game() {
                 },"500");
                 this.grid[this.blacks[i].y][this.blacks[i].x] = null;
                 continue;
-            } else {
-                document.getElementById(`black${i}`).style.opacity = "1";
-            }
+            } 
+            // else {
+            //     document.getElementById(`black${i}`).style.opacity = "1";
+            // }
             var top = 1+10*this.blacks[i].y;
             var left = 1+10*this.blacks[i].x;
             document.getElementById(`black${i}`).style.top = `${top}vmin`;
@@ -80,6 +82,7 @@ function Game() {
         document.getElementById(`${(!this.turn) ? "white" : "black"}Tab`).style.width = "0";
 
         document.getElementById(`${(this.turn) ? "white" : "black"}Tab`).style.width = "45vmin";
+        
     }
     this.SelectPebble = (index,colour) => {
         var selected = ((colour) ? this.whites : this.blacks)[index];
@@ -114,28 +117,57 @@ function Game() {
         this.selected.selected = false;
         this.selected = null;
     }
+
+    this.CheckForEnd = () => {
+        if (this.whites.filter((x) => (x != null && !x.captured)).length == 1) {return 0;}
+        if (this.blacks.filter((x) => (x != null && !x.captured)).length == 1) {return 1;}
+        var canMove = false;
+        for (white of this.whites.filter((x) => (x != null && !x.captured))) {
+            moves = white.FindAvailableMoves();
+            if (moves.up != white.y || moves.down != white.y || moves.left != white.x || moves.right != white.x) {
+                canMove = true;
+                break;
+            }
+        }
+        if (!canMove) {return 0;}
+        var canMove = false;
+        for (black of this.blacks.filter((x) => (x != null && !x.captured))) {
+            moves = black.FindAvailableMoves();
+            if (moves.up != black.y || moves.down != black.y || moves.left != black.x || moves.right != black.x) {
+                canMove = true;
+                break;
+            }
+        }
+        if (!canMove) {return 1;}
+        return -1;
+    }
     for (let i = 0; i < this.whites.length; i++) {
         let white = document.getElementById(`white${i}`);
+        white.style.display = "block";
+        white.style.opacity = "1";
         let whitePebble = this.whites[i];
-        white.addEventListener("click",(e) => {
+        white.onclick = (e) => {
             if (this.turn && !whitePebble.captured) {
                 if (!whitePebble.selected) {this.Unselect();this.SelectPebble(i,true);} 
                 else {this.Unselect()};
             }
-        });
+        };
         
     }
     
 
     for (let i = 0; i < this.blacks.length; i++) {
         let black = document.getElementById(`black${i}`);
+        
+        black.style.display = "block";
+        black.style.opacity = "1";
         let blackPebble = this.blacks[i];
-        black.addEventListener("click",(e) => {
+        black.onclick = (e) => {
         if (!this.turn && !blackPebble.captured) {
                 if (!blackPebble.selected) {this.Unselect();this.SelectPebble(i,false);} 
                 else {this.Unselect()};
             }
-        });
+        };
         
     }
     for (let x = 0; x < 8; x++) {
@@ -171,6 +203,9 @@ function Game() {
                 }
                 
                 this.Draw();
+                if (this.CheckForEnd() > -1) {
+                    ShowWin(this.CheckForEnd());
+                }
             })
         }
         
@@ -326,6 +361,7 @@ function Pebble(x,y,colour,game,index) {
         this.game.grid[this.y][this.x] = null;
         this.x = x;
         this.y = y;
+        
     }
     
 }
@@ -344,6 +380,16 @@ function HideHowTo() {
     setTimeout(() => {document.getElementById("howTo").close();},"250");
 }
 
+function ShowWin(winner) {
+    document.getElementById("winner").innerHTML = (winner) ? "White" : "Black";
+    document.getElementById("gameWon").showModal();
+}
+
+function CloseWin() {
+    document.getElementById("gameWon").close();
+    NewGame();
+}
+
 function ActivateMenuHover() {
     document.getElementById("acts").classList.add("canCloseHover");
     document.getElementById("menuBtn").removeEventListener("mouseleave",ActivateMenuHover);
@@ -351,7 +397,26 @@ function ActivateMenuHover() {
 
 function NewGame() { g = new Game(); }
 
+
+
+function stopResponsiveTransition() {
+  const classes = document.body.classList;
+  let timer = null;
+  window.addEventListener('resize', function () {
+    if (timer){
+      clearTimeout(timer);
+      timer = null;
+    }else {
+      classes.add('stop-transition');
+    }
+    timer = setTimeout(() => {
+      classes.remove('stop-transition');
+      timer = null;
+    }, 100);
+  });
+}
 window.onload = (e) => {
+    stopResponsiveTransition();
     g = new Game();
     if (!document.cookie.includes("no")) {
         document.getElementById("howTo").showModal();
@@ -378,6 +443,7 @@ window.onload = (e) => {
         }
     })
     document.getElementById("restartBtn").addEventListener("click",NewGame);
+    document.getElementById("playAgain").addEventListener("click",CloseWin);
     
 }
 
